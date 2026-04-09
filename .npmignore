@@ -2,4 +2,4 @@ src/
 tsup.config.ts
 tsconfig.json
 __tests__/
-.semaphore/
+.github/
