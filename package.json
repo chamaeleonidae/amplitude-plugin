@@ -1,0 +1,41 @@
+{
+  "name": "@chamaeleonidae/amplitude-plugin",
+  "version": "1.0.0",
+  "description": "Amplitude Browser SDK destination plugin that syncs user attributes to Chameleon",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "tsup": "^8.0.0",
+    "typescript": "^5.4.0",
+    "vitest": "^1.6.0"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chamaeleonidae/amplitude-plugin.git"
+  },
+  "keywords": [
+    "amplitude",
+    "chameleon",
+    "plugin",
+    "sdk",
+    "user-attributes"
+  ]
+}

@@ -1,0 +1,42 @@
+version: v1.0
+name: CI Pipeline
+agent:
+  machine:
+    type: e2-standard-2
+    os_image: ubuntu2404
+global_job_config:
+  secrets:
+    - name: project-variables-01
+  prologue:
+    commands:
+      - checkout
+      - cache restore node_modules-$SEMAPHORE_GIT_BRANCH-$(checksum package-lock.json),node_modules-$SEMAPHORE_GIT_BRANCH,node_modules-main
+      - sem-version node 20
+      - npm install
+  epilogue:
+    commands:
+      - cache store node_modules-$SEMAPHORE_GIT_BRANCH-$(checksum package-lock.json) node_modules
+blocks:
+  - name: Lint
+    task:
+      jobs:
+        - name: TypeScript check
+          commands:
+            - npm run lint
+  - name: Test
+    task:
+      jobs:
+        - name: Tests
+          commands:
+            - npm run test
+  - name: Build
+    task:
+      jobs:
+        - name: Build
+          commands:
+            - npm run build
+promotions:
+  - name: Publish to npm
+    pipeline_file: publish.yml
+    auto_promote:
+      when: result = 'passed' AND tag =~ '^v\d+\.\d+\.\d+$'

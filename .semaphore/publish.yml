@@ -1,0 +1,22 @@
+version: v1.0
+name: Publish to npm
+agent:
+  machine:
+    type: e2-standard-2
+    os_image: ubuntu2404
+global_job_config:
+  secrets:
+    - name: project-variables-01
+    - name: npm-publish-01
+blocks:
+  - name: Publish
+    task:
+      jobs:
+        - name: Publish to npm
+          commands:
+            - checkout
+            - sem-version node 20
+            - npm install
+            - npm run build
+            - echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
+            - npm publish --access public
