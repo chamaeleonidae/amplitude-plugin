@@ -10,12 +10,12 @@ global_job_config:
   prologue:
     commands:
       - checkout
-      - cache restore node_modules-$SEMAPHORE_GIT_BRANCH-$(checksum package-lock.json),node_modules-$SEMAPHORE_GIT_BRANCH,node_modules-main
+      - cache restore node_modules-$SEMAPHORE_GIT_BRANCH-$(checksum bun.lock),node_modules-$SEMAPHORE_GIT_BRANCH,node_modules-main
       - sem-version node 20
-      - npm install
+      - bun install
   epilogue:
     commands:
-      - cache store node_modules-$SEMAPHORE_GIT_BRANCH-$(checksum package-lock.json) node_modules
+      - cache store node_modules-$SEMAPHORE_GIT_BRANCH-$(checksum bun.lock) node_modules
 blocks:
   - name: Lint
     task:
