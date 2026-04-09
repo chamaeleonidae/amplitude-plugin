@@ -86,6 +86,11 @@ function mergeUserProperties(userProperties: AmplitudeEvent['user_properties']):
 export class ChameleonPlugin {
   name = 'chameleon';
   type = 'destination' as const;
+  token?: string;
+
+  constructor(token?: string) {
+    this.token = token;
+  }
 
   async setup(): Promise<undefined> {
     return undefined;

@@ -17,7 +17,7 @@ describe('ChameleonPlugin', () => {
   let plugin: ChameleonPlugin;
 
   beforeEach(() => {
-    plugin = new ChameleonPlugin();
+    plugin = new ChameleonPlugin('test-token');
     win.chmln = { identify: vi.fn() };
   });
 
@@ -34,6 +34,15 @@ describe('ChameleonPlugin', () => {
 
     test('type equals destination', () => {
       expect(plugin.type).toBe('destination');
+    });
+
+    test('stores the token from the constructor', () => {
+      expect(plugin.token).toBe('test-token');
+    });
+
+    test('token is undefined when not provided', () => {
+      const noTokenPlugin = new ChameleonPlugin();
+      expect(noTokenPlugin.token).toBeUndefined();
     });
   });
 

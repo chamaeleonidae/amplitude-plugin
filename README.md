@@ -14,7 +14,7 @@ npm install @chamaeleonidae/amplitude-plugin
 import * as amplitude from '@amplitude/analytics-browser';
 import { ChameleonPlugin } from '@chamaeleonidae/amplitude-plugin';
 
-amplitude.add(new ChameleonPlugin());
+amplitude.add(new ChameleonPlugin('YOUR_CHAMELEON_TOKEN'));
 amplitude.init('YOUR_AMPLITUDE_API_KEY');
 ```
 
